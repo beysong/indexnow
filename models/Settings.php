@@ -1,9 +1,9 @@
-<?php namespace BeySong\IndexNow\Models;
+<?php namespace Beysong\IndexNow\Models;
 
 use Model;
 use Flash;
 use Redirect;
-use BeySong\IndexNow\Classes\IndexNowClient;
+use Beysong\IndexNow\Classes\IndexNowClient;
 
 class Settings extends Model
 {
@@ -29,8 +29,8 @@ class Settings extends Model
      */
     public function onSubmitNow()
     {
-        $apikey = post('BeySong\IndexNow\Models\Settings[apikey]', $this->apikey);
-        $submitUrl = post('BeySong\IndexNow\Models\Settings[submit_url]', '');
+        $apikey = post('Beysong\IndexNow\Models\Settings[apikey]', $this->apikey);
+        $submitUrl = post('Beysong\IndexNow\Models\Settings[submit_url]', '');
 
         if (empty($apikey)) {
             Flash::error('API key is not set. Please configure it first.');

@@ -1,10 +1,10 @@
-<?php namespace BeySong\IndexNow;
+<?php namespace Beysong\IndexNow;
 
 use Route;
 use Config;
 use System\Classes\PluginBase;
 use System\Classes\SettingsManager;
-use BeySong\IndexNow\Models\Settings;
+use Beysong\IndexNow\Models\Settings;
 
 /**
  * IndexNow Plugin Information File
@@ -21,7 +21,7 @@ class Plugin extends PluginBase
         return [
             'name'        => 'IndexNow',
             'description' => 'Submit your sitemap to IndexNow ( Bing ) for fast indexing.',
-            'author'      => 'BeySong',
+            'author'      => 'Beysong',
             'icon'        => 'icon-rocket',
             'icon-svg'    => '/plugins/beysong/indexnow/assets/images/plugin-icon.svg',
             'homepage'    => 'https://www.bing.com/indexnow',
@@ -78,7 +78,7 @@ class Plugin extends PluginBase
                 'description' => 'Configure IndexNow API key and auto-submit settings.',
                 'category'    => SettingsManager::CATEGORY_CMS,
                 'icon'        => 'icon-rocket',
-                'class'       => \BeySong\IndexNow\Models\Settings::class,
+                'class'       => \Beysong\IndexNow\Models\Settings::class,
                 'order'       => 900,
                 'keywords'    => 'indexnow bing seo sitemap',
                 'permissions' => ['beysong.indexnow::manage_settings',],

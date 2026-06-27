@@ -1,4 +1,4 @@
-<?php namespace BeySong\IndexNow\Classes;
+<?php namespace Beysong\IndexNow\Classes;
 
 use Config;
 use Http;

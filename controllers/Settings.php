@@ -1,7 +1,7 @@
-<?php namespace BeySong\IndexNow\Controllers;
+<?php namespace Beysong\IndexNow\Controllers;
 
 use Backend\Classes\Controller;
-use BeySong\IndexNow\Models\Settings;
+use Beysong\IndexNow\Models\Settings;
 use Flash;
 use Redirect;
 
