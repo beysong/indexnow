@@ -2,6 +2,7 @@
 
 use Config;
 use Http;
+use Log;
 use SimpleXMLElement;
 
 class IndexNowClient
@@ -50,11 +51,21 @@ class IndexNowClient
         ];
 
         try {
+            Log::info('[IndexNow] Request', [
+                'url' => $this->apiUrl,
+                'payload' => $payload,
+            ]);
+
             $response = Http::post($this->apiUrl, $payload);
             $status = $response->status();
-            $body = $response->body();
+            $body = trim($response->body());
 
-            if ($status == 202) {
+            Log::info('[IndexNow] Response', [
+                'status' => $status,
+                'body' => $body,
+            ]);
+
+            if ($status == 200) {
                 return [
                     'success' => true,
                     'message' => 'Successfully submitted ' . count($allUrls) . ' URL(s) to IndexNow.',
@@ -67,6 +78,7 @@ class IndexNowClient
                 'message' => 'IndexNow returned status ' . $status . ': ' . ($json['message'] ?? $body),
             ];
         } catch (\Exception $e) {
+            Log::error('[IndexNow] Exception: ' . $e->getMessage());
             return [
                 'success' => false,
                 'message' => 'Failed to submit to IndexNow: ' . $e->getMessage(),
@@ -111,7 +123,6 @@ class IndexNowClient
             foreach ($xml->sitemap as $sitemap) {
                 if (isset($sitemap->loc) && !empty((string) $sitemap->loc)) {
                     $loc = trim((string) $sitemap->loc);
-                    // Recursively fetch child sitemaps
                     $childUrls = $this->extractUrlsFromSitemap($loc);
                     $urls = array_merge($urls, $childUrls);
                 }
@@ -119,6 +130,7 @@ class IndexNowClient
 
             return array_unique($urls);
         } catch (\Exception $e) {
+            Log::error('[IndexNow] Sitemap fetch error: ' . $e->getMessage());
             return [];
         }
     }
